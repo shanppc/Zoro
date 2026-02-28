@@ -962,7 +962,7 @@ contract Comptroller is ComptrollerV7Storage, ComptrollerInterface, ComptrollerE
     }
 
     function _initializeMarket(address cToken) internal {
-        uint32 blockNumber = safe32(getBlockNumber(), "block number exceeds 32 bits");
+        uint256 blockNumber = getBlockNumber();
 
         CompMarketState storage supplyState = compSupplyState[cToken];
         CompMarketState storage borrowState = compBorrowState[cToken];
@@ -1188,7 +1188,7 @@ contract Comptroller is ComptrollerV7Storage, ComptrollerInterface, ComptrollerE
     function updateCompSupplyIndex(address cToken) internal {
         CompMarketState storage supplyState = compSupplyState[cToken];
         uint supplySpeed = compSupplySpeeds[cToken];
-        uint32 blockNumber = safe32(getBlockNumber(), "block number exceeds 32 bits");
+        uint blockNumber = getBlockNumber();
         uint deltaBlocks = sub_(uint(blockNumber), uint(supplyState.block));
         if (deltaBlocks > 0 && supplySpeed > 0) {
             uint supplyTokens = CToken(cToken).totalSupply();
@@ -1209,7 +1209,7 @@ contract Comptroller is ComptrollerV7Storage, ComptrollerInterface, ComptrollerE
     function updateCompBorrowIndex(address cToken, Exp memory marketBorrowIndex) internal {
         CompMarketState storage borrowState = compBorrowState[cToken];
         uint borrowSpeed = compBorrowSpeeds[cToken];
-        uint32 blockNumber = safe32(getBlockNumber(), "block number exceeds 32 bits");
+        uint blockNumber = getBlockNumber();
         uint deltaBlocks = sub_(uint(blockNumber), uint(borrowState.block));
         if (deltaBlocks > 0 && borrowSpeed > 0) {
             uint borrowAmount = div_(CToken(cToken).totalBorrows(), marketBorrowIndex);

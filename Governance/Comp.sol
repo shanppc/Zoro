@@ -59,8 +59,9 @@ contract Comp {
     /**
      * @notice Construct a new Comp token
      * @param account The initial account to grant all the tokens
+     * @notice we cant define constructor visibilty. if we do it will throw error.
      */
-    constructor(address account) public {
+    constructor(address account) {
         balances[account] = uint96(totalSupply);
         emit Transfer(address(0), account, totalSupply);
     }

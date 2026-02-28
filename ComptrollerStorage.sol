@@ -99,7 +99,7 @@ contract ComptrollerV3Storage is ComptrollerV2Storage {
         uint224 index;
 
         // The block number the index was last updated at
-        uint32 block;
+        uint block;
     }
 
     /// @notice A list of all markets
